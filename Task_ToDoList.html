@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>To-Do List</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-image: url(https://c8.alamy.com/comp/M4WB3G/to-do-list-seamless-pattern-background-business-flat-vector-illustration-M4WB3G.jpg);
+    background-size: 100%;
+    background-position: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.todo {
+    background-color: black;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.801);
+}
+
+h1 {
+    text-align: center;
+    font-family: monospace;
+    color: whitesmoke;
+}
+
+
+.input-container {
+    display: flex;
+    margin-top: 20px;
+}
+
+input {
+    flex: 1;
+    padding: 8px;
+}
+
+button {
+    padding: 8px 12px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-left: 8px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.task {
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(0, 140, 255);
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 4px;
+}
+
+.task button {
+    background-color: red;
+    color: bisque;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-left: 8px;
+}
+
+.task button:hover {
+    background-color: grey;
+}
+
+.edit-input {
+    flex: 1;
+    padding: 8px;
+}
+</style>
+</head>
+<body>
+    <div class="todo">
+        <h1>TO-DO LIST</h1>
+       
+        <div class="input">
+            <input type="text" id="todoInput" placeholder="Affix your task here">
+            <button onclick="addTask()">ADD </button>
+        </div>
+        <div id="tasks">
+           
+        </div>
+    </div>
+    <script>
+        function addTask() {
+        const taskInput = document.getElementById('todoInput');
+        const tasksContainer = document.getElementById('tasks');
+    
+        if (todoInput.value.trim() !== '') {
+            const taskDiv = document.createElement('div');
+            taskDiv.className = 'task';
+    
+            const taskText = document.createElement('span');
+            taskText.innerText = todoInput.value;
+    
+            const editButton = document.createElement('button');
+            editButton.innerText = 'EDIT';
+            editButton.addEventListener('click', function () {
+                editTask(taskText, taskDiv);
+            });
+    
+            const deleteButton = document.createElement('button');
+            deleteButton.innerText = 'REMOVE';
+            deleteButton.addEventListener('click', function () {
+                tasksContainer.removeChild(taskDiv);
+            });
+    
+            taskDiv.appendChild(taskText);
+            taskDiv.appendChild(editButton);
+            taskDiv.appendChild(deleteButton);
+            tasksContainer.appendChild(taskDiv);
+    
+            todoInput.value = '';
+        }
+    }
+    
+    function editTask(taskText, taskDiv) {
+        const editText = prompt('Edit task:', taskText.innerText);
+    
+        if (editText !== null) {
+            taskText.innerText = editText;
+        }
+    }
+    
+    </script>
+</body>
+</html>
